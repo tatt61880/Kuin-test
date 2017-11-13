@@ -13,11 +13,17 @@ Find.find(dir) {|fpath|
 	if fpath =~ /main.kn$/
 		outputFile = curDir + "/output.txt"
 		knDir = File::dirname(fpath)
-		out, err, status = Open3.capture3("cmd.exe /Q /C \"kuincl -i #{fpath} -e cui -q > #{outputFile}\"")
-		if FileUtils.cmp(outputFile, "#{knDir}/output.txt")
-			countOk += 1
+		out, err, status = Open3.capture3("cmd.exe /Q /C \"kuincl -i #{fpath} -e cui -q")
+		if status == 0
+			out, err, status = Open3.capture3("#{knDir}/out.exe > #{outputFile}")
+			if FileUtils.cmp(outputFile, "#{knDir}/output.txt")
+				countOk += 1
+			else
+				puts "Error: [#{fpath.sub(dir, "")}]"
+				countUnexpected += 1
+			end
 		else
-			puts "Error: #{fpath}"
+			puts "Error: [#{fpath.sub(dir, "")}] status:[#{status}]"
 			countUnexpected += 1
 		end
 	end
