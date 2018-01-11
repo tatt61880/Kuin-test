@@ -1,0 +1,19 @@
+func main()
+	do cui@print("\{lib@acos(0.0) * 2.0}\n")
+	do cui@print("\{lib@acos(1.0)}\n")
+	try e
+		do cui@print("\{lib@acos(2.0)}\n")
+	catch
+		do cui@print("excpt:\{e.toStrFmt("X")}\n")
+	end try
+
+	do cui@print("\{lib@acosh(0.0)}\n")
+	do cui@print("\{lib@acosh(1.0)}\n")
+	do cui@print("\{lib@acosh(2.0)}\n")
+
+	do cui@print("\{lib@asin(0.0) * 2.0}\n")
+	do cui@print("\{lib@asin(1.0)}\n")
+	do cui@print("\{lib@asin(2.0)}\n")
+
+
+end func
