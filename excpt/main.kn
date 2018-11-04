@@ -13,7 +13,6 @@ func main()
 		dbgArrayIdxOutOfRange :: excpt@dbgArrayIdxOutOfRange
 		dbgIntOverflow :: excpt@dbgIntOverflow
 		invalidCmp :: excpt@invalidCmp
-		libClassInvalidOperation :: excpt@libClassInvalidOperation
 		dbgArgOutDomain :: excpt@dbgArgOutDomain
 		fileReadFailed :: excpt@fileReadFailed
 		invalidDataFmt :: excpt@invalidDataFmt
