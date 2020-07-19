@@ -15,22 +15,28 @@ Find.find(dir) {|fpath|
 	Find.prune if(fpath == curDir)
 	if fpath =~ /main.kn$/
 		knDir = File::dirname(fpath)
-		out, err, status = Open3.capture3("cmd.exe /Q /C \"kuincl -i #{fpath} -e cui -q")
+		out, err, status = Open3.capture3("cmd.exe /Q /C \"kuincl -i #{fpath} -e exe -s ../../KuinInKuin/build/deploy_exe/sys/ -q > #{tempFilepath}")
 		if status == 0
 			out, err, status = Open3.capture3("#{knDir}/out.exe > #{tempFilepath}")
 			if FileUtils.cmp(tempFilepath, "#{knDir}/output.txt")
 				countOk += 1
 			else
-				puts "Error: [#{fpath.sub(dir, "")}]"
 				countUnexpected += 1
+				puts "\nError: [#{fpath.sub(dir, "")}]"
 			end
 		else
-			puts "Error: [#{fpath.sub(dir, "")}] status:[#{status}]"
 			countUnexpected += 1
+			puts "\nError: [#{fpath.sub(dir, "")}] status:[#{status}]"
+			f = File.open(tempFilepath)
+			s = f.read
+			f.close
+			print s
 		end
 	end
 }
-File.unlink tempFilepath
+if File.exist?(tempFilepath)
+	File.unlink tempFilepath
+end
 
 puts "#{countOk}/#{countOk + countUnexpected}"
 if countUnexpected == 0
