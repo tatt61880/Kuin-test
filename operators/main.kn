@@ -1,0 +1,19 @@
+func main()
+	assert true = true
+	assert true <> !true
+	assert true = !!true
+	assert true <> !!!true
+	assert true & true = true
+	assert true | true = true
+	assert true | false = true
+	assert true | false & true = true
+	assert true | false & false <> true
+	var c: C :: #C
+	assert c =$ C
+	assert c =$ kuin@Class
+	assert 2 ^ 3 ^ 2 = 2 ^ 3 ^ 2
+	assert 2 ^ 3 ^ 2 = 2 ^ (3 ^ 2)
+	assert 2 ^ 3 ^ 2 <> (2 ^ 3) ^ 2
+	class C()
+	end class
+end func
